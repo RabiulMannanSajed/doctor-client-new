@@ -30,9 +30,6 @@ const Login = () => {
         }
     }, [emailUser, googleUser, from, navigate])
 
-    if (googleUser) {
-        console.log(googleUser);
-    }
 
     if (googleLoading || emailLoading) {
         return <Loading></Loading>
