@@ -2,18 +2,51 @@ import React from 'react';
 import { format } from 'date-fns';
 import auth from '../../firebase.init';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { toast } from 'react-toastify';
 
 
 const BookingModal = ({ date, treatment, setTreatment }) => {
-    const { name, slots } = treatment;
+    const { _id, name, slots } = treatment;
     const [user, loading, error] = useAuthState(auth);
+
     const handelBooking = event => {
         event.preventDefault();
         const slot = event.target.slot.value;
-        console.log(name, slot);
+        console.log(_id, name, slot);
 
-        // to close the model 
-        setTreatment(null);
+        const formattedDate = format(date, 'pp');
+
+        const booking = {
+            treatmentId: _id,
+            treatmentName: name,
+            date: formattedDate,
+            slot,
+            patient: user.email,
+            patientName: user.displayName,
+            phone: event.target.phone.value,
+        }
+        fetch('http://localhost:5000/booking', {
+            method: 'Post',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(booking)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.success) {
+                    toast(`Appointment is set, ${formattedDate} at ${slot}`)
+                }
+                else {
+                    toast.error(`You already have an appointment on, ${data.booking?.data} at ${data.booking?.slot} `)
+                }
+                // to close the model 
+                setTreatment(null);
+            })
+
+
+
     }
 
     return (
