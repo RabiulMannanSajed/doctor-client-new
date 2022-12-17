@@ -14,7 +14,7 @@ const BookingModal = ({ date, treatment, setTreatment }) => {
         const slot = event.target.slot.value;
         console.log(_id, name, slot);
 
-        const formattedDate = format(date, 'pp');
+        const formattedDate = format(date, 'PP');
 
         const booking = {
             treatmentId: _id,
