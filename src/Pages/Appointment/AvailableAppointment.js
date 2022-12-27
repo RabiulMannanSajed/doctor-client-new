@@ -8,6 +8,8 @@ const AvailableAppointment = ({ date }) => {
 
     const [treatment, setTreatment] = useState(null);
 
+    // const formattedDate = format(date, 'PP');
+
     useEffect(() => {
         // fetch('service.json') //coming from our clint site 
         // this is coming from our server site mongoDB 
