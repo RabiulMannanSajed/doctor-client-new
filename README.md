@@ -1,6 +1,8 @@
 # this project is about doctor 
-Some tested code 
-I am sajed 
+
+Here Used Tailwind ,DaisyUI , Firebase , react-hook, query, date-fns 
+* This is not deploy in live server so Can't see the live server 
+* Not finish yet 
 ## Available Scripts
 
 In the project directory, you can run:
